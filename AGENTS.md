@@ -20,8 +20,12 @@ ils-specs/
 ├── .markdownlint.json         # markdownlint config aligned with mdformat
 ├── .mdformat.toml             # mdformat config (wrap, numbering)
 ├── .gitignore
+├── mkdocs.yml                 # MkDocs site configuration
 ├── pyproject.toml             # Python project config (uv)
 ├── uv.lock                    # Locked dependencies
+├── .github/
+│   └── workflows/
+│       └── deploy-pages.yml   # GitHub Pages deployment
 ├── .githooks/
 │   └── pre-commit             # Markdown formatting check
 ├── scripts/
@@ -135,6 +139,18 @@ This is a `uv`-managed Python project. Dependencies are declared in
 uv sync          # Install dependencies
 uv run <cmd>     # Run commands in the project environment
 ```
+
+### Site Publishing
+
+Specs are published as a website via MkDocs + Material theme, deployed
+automatically to GitHub Pages on push to `main`.
+
+```bash
+uv run mkdocs serve    # Local preview at http://127.0.0.1:8000
+uv run mkdocs build    # Build static site to site/
+```
+
+**When adding a new spec, also add it to the `nav` section in `mkdocs.yml`.**
 
 ## Commit Message Format
 

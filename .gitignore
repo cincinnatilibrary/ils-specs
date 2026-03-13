@@ -8,6 +8,6 @@ __pycache__/
 *.pyc
 .venv/
 
-# Rendered output (future)
-_site/
+# Rendered output
+site/
 _build/
