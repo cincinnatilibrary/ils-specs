@@ -29,6 +29,9 @@ SEMVER_RE = re.compile(r"^\d+\.\d+\.\d+$")
 # Files in specs/ that are not spec documents
 SKIP_FILES = {"README.md", "FRAMEWORK.md", "glossary.md", "schema.yaml"}
 
+# Directories under specs/ that are not category folders
+SKIP_DIRS = {"guides"}
+
 
 def load_schema():
     """Load the machine-readable schema from schema.yaml."""
@@ -37,14 +40,17 @@ def load_schema():
 
 
 def get_framework_version():
-    """Extract the version string from FRAMEWORK.md's header."""
+    """Extract the version string from FRAMEWORK.md's YAML front matter."""
     with open(FRAMEWORK_PATH) as f:
-        for line in f:
-            if line.startswith("**Version:**"):
-                # Extract version from "**Version:** 1.0.0"
-                match = re.search(r"\d+\.\d+\.\d+", line)
-                if match:
-                    return match.group(0)
+        content = f.read()
+    parts = content.split("---")
+    if len(parts) >= 3:
+        try:
+            fm = yaml.safe_load(parts[1])
+            if fm and "version" in fm:
+                return str(fm["version"])
+        except yaml.YAMLError:
+            pass
     return None
 
 
@@ -70,8 +76,9 @@ def find_spec_files():
     """Find all .md files in specs/ subdirectories (category folders)."""
     specs = []
     for root, dirs, files in os.walk(SPECS_DIR):
-        # Skip the specs/ root directory files
+        # Skip the specs/ root directory files and non-category dirs
         if root == SPECS_DIR:
+            dirs[:] = [d for d in dirs if d not in SKIP_DIRS]
             continue
         for f in sorted(files):
             if f.endswith(".md") and f not in SKIP_FILES and f != ".gitkeep":

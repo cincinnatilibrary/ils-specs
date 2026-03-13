@@ -34,9 +34,12 @@ ils-specs/
 │   └── format-specs.sh        # Auto-format all markdown files
 └── specs/
     ├── README.md              # Reader entry point with navigable index
-    ├── FRAMEWORK.md           # How to write specs — format, schema, style guide
+    ├── FRAMEWORK.md           # Common conventions: front matter, versioning, style
     ├── glossary.md            # Controlled vocabulary with anchored terms
     ├── schema.yaml            # Machine-readable schema (categories, statuses, etc.)
+    ├── guides/                # Category-specific writing guides
+    │   ├── report-guide.md    # How to write report specifications
+    │   └── code-table-guide.md # How to write code table specifications (stub)
     ├── reports/               # Report specifications
     ├── code-tables/           # Code table specifications
     ├── loan-rules/            # Loan rule specifications
@@ -46,27 +49,33 @@ ils-specs/
 
 ## Key Files You Must Read Before Modifying Specs
 
-1. **`specs/FRAMEWORK.md`** — the authoritative guide for spec format, front
-   matter schema, body sections, rules format, and style guide. All specs must
-   conform to this framework.
-2. **`specs/schema.yaml`** — machine-readable companion to FRAMEWORK.md. If you
-   change valid categories, statuses, or required fields, update both files and
-   keep their versions aligned.
-3. **`specs/glossary.md`** — controlled vocabulary. Link to it when using terms
+1. **`specs/FRAMEWORK.md`** — common conventions for all spec types: front
+   matter schema, versioning, cross-referencing, glossary, and style guide.
+2. **`specs/guides/report-guide.md`** — how to write and read report
+   specifications. Includes annotated examples and explains flag conditions,
+   status levels, and working with code tables.
+3. **`specs/schema.yaml`** — machine-readable companion to FRAMEWORK.md. If
+   you change valid categories, statuses, or required fields, update both
+   files and keep their versions aligned.
+4. **`specs/glossary.md`** — controlled vocabulary. Link to it when using terms
    that have specific meanings (e.g., "hold-filled", "item type", "suppressed").
 
 ## Working with Specs
 
 ### Creating a New Spec
 
-1. Read `specs/FRAMEWORK.md` for the format
-2. Determine the category (`report`, `code-table`, `loan-rule`, `workflow`, `policy`)
-3. Create the file at `specs/{category-folder}/{id}.md`
-4. Include all required front matter fields (see `schema.yaml` for the list)
-5. Follow the body section structure for that category
-6. Add the spec to the index table in `specs/README.md`
-7. Run validation: `uv run python scripts/validate-specs.py`
-8. Run formatting: `./scripts/format-specs.sh`
+1. Read `specs/FRAMEWORK.md` for common conventions (front matter, versioning,
+   style guide)
+2. Determine the category (`report`, `code-table`, `loan-rule`, `workflow`,
+   `policy`)
+3. Read the category guide in `specs/guides/` for body structure and section
+   requirements (e.g., `specs/guides/report-guide.md` for reports)
+4. Create the file at `specs/{category-folder}/{id}.md`
+5. Include all required front matter fields (see `schema.yaml` for the list)
+6. Follow the body section structure from the category guide
+7. Add the spec to the index table in `specs/README.md`
+8. Run validation: `uv run python scripts/validate-specs.py`
+9. Run formatting: `./scripts/format-specs.sh`
 
 ### Modifying an Existing Spec
 

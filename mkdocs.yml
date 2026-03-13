@@ -24,6 +24,9 @@ nav:
   - Reference:
       - Framework: FRAMEWORK.md
       - Glossary: glossary.md
+  - Guides:
+      - Report Specifications: guides/report-guide.md
+      - Code Tables: guides/code-table-guide.md
   - Reports:
       - reports/slitemdata.md
   - Code Tables:

@@ -6,7 +6,7 @@ owner: ILS Team
 reviewers:
   - Report Assessment Team
 status: draft
-version: 0.1.0
+version: 0.2.0
 last_updated: 2026-03-13
 implementation:
   - Reports/shelflist/SierraItemData-2024-06-03.pl
@@ -69,7 +69,7 @@ which combinations of item type, location, bcode2, and audience are considered
 valid. These mapping tables are the core business logic of the report and are
 described in the flag rules below.
 
-## Rules / Conditions
+## Flag Conditions
 
 Each flag condition causes an item to appear in the report output. An item may be
 flagged for multiple reasons.
@@ -234,3 +234,4 @@ These need to be resolved with the Report Assessment Team and ILS Team:
 ## Change Log
 
 - 2026-03-13 · v0.1.0 · Initial draft, distilled from Perl script analysis (ILS Team)
+- 2026-03-13 · v0.2.0 · Rename "Rules / Conditions" to "Flag Conditions" per framework 2.0 (ILS Team)
