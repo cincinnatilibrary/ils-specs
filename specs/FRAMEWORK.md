@@ -69,6 +69,8 @@ last_updated: 2026-03-13          # required — ISO date
 # Implementation
 implementation:                   # optional — path(s) to the script or Sierra config
   - "Reports/shelflist/slitemdata.pl"  # that implements this spec
+code_prefix: ITYPE               # optional (code-table only) — prefix for registry
+                                  # entry identifiers (e.g., ITYPE-70, LOC-avo, PTYPE-3)
 schedule: "Monthly, 1st of month" # optional (required for reports) — human-readable
                                   # schedule, starting with frequency word
 output_delivered_to:              # optional (required for reports) — who receives output
@@ -198,13 +200,13 @@ ______________________________________________________________________
 Each rule gets a stable identifier (never reused or renumbered) with a
 category-specific prefix:
 
-| Category      | Prefix | Example                                   |
-| ------------- | ------ | ----------------------------------------- |
-| report flag   | `F`    | `### F01 · Location / Item Type Mismatch` |
-| code          | `C`    | `### C01 · Main Library`                  |
-| loan rule     | `L`    | `### L01 · Standard DVD Checkout`         |
-| policy        | `P`    | `### P01 · Card Expiration`               |
-| workflow step | `S`    | `### S01 · Page Item From Shelf`          |
+| Category        | Prefix | Example                                   |
+| --------------- | ------ | ----------------------------------------- |
+| report flag     | `F`    | `### F01 · Location / Item Type Mismatch` |
+| code-table rule | `C`    | `### C01 · Main Library`                  |
+| loan rule       | `L`    | `### L01 · Standard DVD Checkout`         |
+| policy          | `P`    | `### P01 · Card Expiration`               |
+| workflow step   | `S`    | `### S01 · Page Item From Shelf`          |
 
 Each rule subsection should contain, in roughly this order:
 
@@ -261,6 +263,38 @@ are expected and transient.
 
 ______________________________________________________________________
 
+## Registry Definitions Format
+
+Code-table specs may include a **Registry** section that enumerates all defined
+values in a Sierra code table. Each entry's identifier is the spec's
+`code_prefix` (declared in front matter) followed by a dash and the Sierra code
+value — e.g., `ITYPE-70`, `PTYPE-3`, `LOC-avo`. These identifiers are inherently
+stable because they are tied to the system code.
+
+### Registry Entry Format
+
+```markdown
+### ITYPE-70 · Book on CD
+
+Audiobook on compact disc for adult patrons.
+
+**Status:** confirmed
+```
+
+The heading pattern is `### {PREFIX}-{CODE} · {Label}`. The body is a brief
+description. Add additional notes only when there is something notable about
+the code.
+
+The `code_prefix` front matter field declares the prefix:
+
+```yaml
+code_prefix: ITYPE    # → headings like ITYPE-70, ITYPE-101
+code_prefix: LOC      # → headings like LOC-avo, LOC-main
+code_prefix: PTYPE    # → headings like PTYPE-3, PTYPE-196
+```
+
+______________________________________________________________________
+
 ## Cross-Referencing Conventions
 
 Specs reference each other using three patterns. Use them together as appropriate.
@@ -288,7 +322,17 @@ of valid location/item-type combinations.
 
 Use relative links so they work when browsing the repository directly.
 
-### 3. Glossary Links
+### 3. Registry Entry Links
+
+```markdown
+See [Book on CD](../code-tables/item-types.md#itype-70--book-on-cd) for details
+on this item type.
+```
+
+Registry entry headings produce standard Markdown anchors. The anchor is the
+heading text, lowercased, with spaces and the `·` replaced by hyphens.
+
+### 4. Glossary Links
 
 ```markdown
 A [hold-filled](../glossary.md#hold-filled) transaction is recorded when the
