@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if page.meta and page.meta.id %}
+<style>
+.spec-metadata {
+  margin-bottom: 1.5em;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: .2rem;
+  overflow: hidden;
+}
+.spec-metadata table {
+  margin: 0;
+  width: 100%;
+  font-size: .85rem;
+}
+.spec-metadata th {
+  width: 140px;
+  white-space: nowrap;
+  background: var(--md-default-fg-color--lightest);
+}
+.status-draft { color: #e67700; font-weight: 600; }
+.status-active { color: #2e7d32; font-weight: 600; }
+.status-review { color: #1565c0; font-weight: 600; }
+.status-deprecated { color: #c62828; font-weight: 600; }
+</style>
+<div class="spec-metadata">
+  <table>
+    <tr><th>ID</th><td><code>{{ page.meta.id }}</code></td></tr>
+    <tr><th>Category</th><td>{{ page.meta.category }}</td></tr>
+    <tr><th>Owner</th><td>{{ page.meta.owner }}</td></tr>
+    {% if page.meta.reviewers %}
+    <tr><th>Reviewers</th><td>{{ page.meta.reviewers | join(", ") }}</td></tr>
+    {% endif %}
+    <tr><th>Status</th><td><span class="status-{{ page.meta.status }}">{{ page.meta.status }}</span></td></tr>
+    <tr><th>Version</th><td>{{ page.meta.version }}</td></tr>
+    <tr><th>Last Updated</th><td>{{ page.meta.last_updated }}</td></tr>
+    {% if page.meta.schedule %}
+    <tr><th>Schedule</th><td>{{ page.meta.schedule }}</td></tr>
+    {% endif %}
+    {% if page.meta.output_delivered_to %}
+    <tr><th>Delivered To</th><td>{{ page.meta.output_delivered_to | join(", ") }}</td></tr>
+    {% endif %}
+    {% if page.meta.depends_on %}
+    <tr><th>Depends On</th><td>{{ page.meta.depends_on | join(", ") }}</td></tr>
+    {% endif %}
+    {% if page.meta.related_specs %}
+    <tr><th>Related Specs</th><td>{{ page.meta.related_specs | join(", ") }}</td></tr>
+    {% endif %}
+  </table>
+</div>
+{% elif page.meta and page.meta.version and not page.meta.id %}
+<style>
+.spec-metadata {
+  margin-bottom: 1.5em;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: .2rem;
+  overflow: hidden;
+}
+.spec-metadata table {
+  margin: 0;
+  width: 100%;
+  font-size: .85rem;
+}
+.spec-metadata th {
+  width: 140px;
+  white-space: nowrap;
+  background: var(--md-default-fg-color--lightest);
+}
+</style>
+<div class="spec-metadata">
+  <table>
+    <tr><th>Version</th><td>{{ page.meta.version }}</td></tr>
+    {% if page.meta.purpose %}
+    <tr><th>Purpose</th><td>{{ page.meta.purpose }}</td></tr>
+    {% endif %}
+  </table>
+</div>
+{% endif %}
+{{ super() }}
+{% endblock %}
