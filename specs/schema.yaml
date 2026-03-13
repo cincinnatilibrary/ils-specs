@@ -39,6 +39,11 @@ required_fields:
     - schedule
     - output_delivered_to
 
+# Optional fields by category
+optional_fields:
+  code-table:
+    - code_prefix
+
 # Rule identifier prefixes by category
 rule_prefixes:
   report: "F"
