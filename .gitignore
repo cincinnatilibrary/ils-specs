@@ -1,0 +1,13 @@
+# Editor files
+*.swp
+*~
+.DS_Store
+
+# Python / uv
+__pycache__/
+*.pyc
+.venv/
+
+# Rendered output (future)
+_site/
+_build/

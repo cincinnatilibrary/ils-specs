@@ -1,0 +1,19 @@
+#!/bin/bash
+set -e
+
+# Check staged .md files with mdformat
+staged_md=$(git diff --cached --name-only --diff-filter=ACM -- '*.md')
+
+if [ -z "$staged_md" ]; then
+    exit 0
+fi
+
+echo "Checking markdown formatting..." >&2
+
+# shellcheck disable=SC2086
+if ! uv run mdformat --check $staged_md; then
+    echo "" >&2
+    echo "Markdown formatting check failed." >&2
+    echo "Run ./scripts/format-specs.sh to fix, then re-stage." >&2
+    exit 1
+fi

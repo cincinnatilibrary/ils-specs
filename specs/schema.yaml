@@ -1,0 +1,56 @@
+# Machine-readable schema for the ILS Specification Framework.
+# This file is the canonical source for validation tooling.
+# FRAMEWORK.md is the canonical source for human readers.
+# Keep both in sync — the validation script checks framework_version
+# against FRAMEWORK.md's header to catch drift.
+
+framework_version: "1.0.0"
+
+categories:
+  - report
+  - code-table
+  - loan-rule
+  - workflow
+  - policy
+
+# Spec-level status (document lifecycle)
+statuses:
+  - draft
+  - active
+  - deprecated
+
+# Rule-level status (business rule validation state)
+rule_statuses:
+  - confirmed
+  - proposed
+  - under-review
+  - deprecated
+
+required_fields:
+  all:
+    - id
+    - title
+    - category
+    - owner
+    - status
+    - version
+    - last_updated
+  report:
+    - schedule
+    - output_delivered_to
+
+# Rule identifier prefixes by category
+rule_prefixes:
+  report: "F"
+  code-table: "C"
+  loan-rule: "L"
+  policy: "P"
+  workflow: "S"
+
+# Category folder names (pluralized)
+category_folders:
+  report: reports
+  code-table: code-tables
+  loan-rule: loan-rules
+  workflow: workflows
+  policy: policies
