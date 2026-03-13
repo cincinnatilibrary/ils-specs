@@ -25,6 +25,7 @@ ils-specs/
 ├── uv.lock                    # Locked dependencies
 ├── .github/
 │   └── workflows/
+│       ├── ci.yml             # PR build/validation checks
 │       └── deploy-pages.yml   # GitHub Pages deployment
 ├── .githooks/
 │   └── pre-commit             # Markdown formatting check
@@ -139,6 +140,12 @@ This is a `uv`-managed Python project. Dependencies are declared in
 uv sync          # Install dependencies
 uv run <cmd>     # Run commands in the project environment
 ```
+
+### Continuous Integration
+
+Pull requests to `main` automatically run validation, formatting checks, and a
+strict site build via the CI workflow (`.github/workflows/ci.yml`). This catches
+broken specs, formatting drift, and build errors before merge.
 
 ### Site Publishing
 

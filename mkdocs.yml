@@ -1,12 +1,14 @@
 site_name: CHPL ILS Specifications
 site_description: Business logic specifications for Cincinnati & Hamilton County Public Library's Integrated Library System
 repo_url: https://github.com/cincinnatilibrary/ils-specs
+edit_uri: edit/main/specs/
 
 docs_dir: specs
 site_dir: site
 
 theme:
   name: material
+  custom_dir: overrides
   features:
     - navigation.sections
     - navigation.expand
