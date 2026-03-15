@@ -129,9 +129,8 @@ formatting.
     code-value registries (like item-types.md).
   - A code table spec uses EITHER a Registry section (S06 headings)
     OR a Rules section (S08 headings), not both.
-  - When a code table spec uses Rules, it must have `code_prefix`
-    in front matter if it also has registry entries, but `code_prefix`
-    is not required for rule-only code table specs.
+  - `code_prefix` is required for Registry-style specs (it provides
+    the heading prefix). It is not required for Rules-style specs.
 
 ### Dimension 2: Language & Tone
 
