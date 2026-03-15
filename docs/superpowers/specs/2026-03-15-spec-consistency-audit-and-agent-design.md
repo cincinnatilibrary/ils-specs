@@ -50,6 +50,20 @@ Five passes across all documents, each focused on one consistency
 concern. Issues are fixed as discovered. Each finding is recorded as a
 rule for the agent.
 
+### Pre-Flight: Known Deviations
+
+Before starting the dimension passes, acknowledge the current state of
+files that do not yet conform to the conventions they will be audited
+against. These are not failures — they are the starting conditions the
+audit will resolve.
+
+| File | Deviation | Resolution |
+| --- | --- | --- |
+| `specs/code-tables/location-codes.md` | Uses "Rules / Codes" section heading instead of "Registry"; uses `C01`/`C02` rule-style identifiers instead of `LOC-xxx` registry entries; missing `code_prefix` front matter field | Audit will determine whether this file should use registry format (like item-types.md) or a separate "rules/categories" structure. See S08. |
+| `specs/guides/code-table-guide.md` | Stub — does not prescribe a full section ordering. S02 references an ordering that the guide does not yet define. | Phase 1 Pass 1 will codify the code-table section ordering in the guide as a prerequisite to auditing against it. |
+| `specs/glossary.md` | No YAML front matter at all (no `title` field) | Will be addressed under M04. |
+| `specs/guides/code-table-guide.md` | Change log entry missing version number and team per L06 format | Will be fixed during Pass 2. |
+
 ### Files in Scope
 
 | File                              | Role                          |
@@ -72,7 +86,7 @@ formatting.
 
 **Rules:**
 
-- S01: Report specs must have sections in this order:
+- S01 (Error): Report specs must have sections in this order:
   1. Purpose
   2. Scope & Audience
   3. Data Sources
@@ -82,21 +96,42 @@ formatting.
   7. Open Questions
   8. Known Limitations
   9. Change Log
-- S02: Code table specs must have sections in this order:
+- S02 (Error): Code table specs must have sections in this order:
   1. Purpose
   2. Scope & Audience
-  3. Registry
+  3. Registry (for code-value listings) or Rules (for structural
+     categories) — see S08
   4. Sierra Configuration
   5. Open Questions
   6. Change Log
-- S03: All specs start with an `# {title}` heading that matches the
-  front matter `title` field exactly.
-- S04: Horizontal rules are used consistently as section separators.
+  - **Note:** This ordering must be codified in the code-table-guide
+    during Phase 1 Pass 1 before auditing against it. The current
+    guide stub does not prescribe it.
+- S03 (Error): All specs start with an `# {title}` heading that matches
+  the front matter `title` field exactly.
+- S04 (Warning): Horizontal rules are used consistently as section
+  separators.
   - Current state: FRAMEWORK.md, guides, and glossary use them;
     specs vary. Audit will determine one convention.
-- S05: Flag condition headings follow `### F{nn} · {Name}` pattern.
-- S06: Registry entry headings follow `### {PREFIX}-{code} · {Label}`.
-- S07: Every spec ends with a Change Log section as the last section.
+- S05 (Error): Flag condition headings follow `### F{nn} · {Name}`
+  pattern. The prefix `F` comes from `schema.yaml` `rule_prefixes`
+  for the `report` category.
+- S06 (Error): Registry entry headings follow
+  `### {PREFIX}-{code} · {Label}`, where `{PREFIX}` is the
+  `code_prefix` front matter field.
+- S07 (Warning): Every spec ends with a Change Log section as the last
+  section.
+- S08 (Error): Code table rule/category headings follow
+  `### C{nn} · {Name}` pattern. The prefix `C` comes from
+  `schema.yaml` `rule_prefixes` for the `code-table` category.
+  - This applies to code table specs that describe structural
+    categories (like location-codes.md) rather than individual
+    code-value registries (like item-types.md).
+  - A code table spec uses EITHER a Registry section (S06 headings)
+    OR a Rules section (S08 headings), not both.
+  - When a code table spec uses Rules, it must have `code_prefix`
+    in front matter if it also has registry entries, but `code_prefix`
+    is not required for rule-only code table specs.
 
 ### Dimension 2: Language & Tone
 
@@ -105,27 +140,31 @@ per the style guide, and non-repetitive language in parallel sections.
 
 **Rules:**
 
-- L01: Present tense throughout.
+- L01 (Warning): Present tense throughout.
   - Correct: "An item is flagged when..."
   - Incorrect: "An item will be flagged when..."
-- L02: Purpose sections across specs use similar structure:
+- L02 (Note): Purpose sections across specs use similar structure:
   1. What it does (1-2 sentences)
   2. Why it matters (1-2 sentences)
   3. Optional additional context (1 paragraph max)
-- L03: Scope & Audience sections use consistent three-part structure:
+- L03 (Warning): Scope & Audience sections use consistent three-part
+  structure:
   - `**Audience:**` — who uses this
   - `**In scope:**` — what is covered
   - `**Out of scope:**` — what is excluded
-- L04: Plain English in rule/condition statements.
+- L04 (Warning): Plain English in rule/condition statements.
   - Use "item type" not "itype"
   - Use "location code" not "location_code"
   - Technical names belong only in Technical Implementation notes
-- L05: Status labels use consistent formatting: `**Status:** {value}`
-  (bold label, colon inside bold, space, lowercase value).
-- L06: Change Log entries follow the format:
+- L05 (Warning): Status labels use consistent formatting:
+  `**Status:** {value}` (bold label, colon inside bold, space,
+  lowercase value).
+- L06 (Warning): Change Log entries follow the format:
   `- {YYYY-MM-DD} · v{version} · {description} ({team})`
-- L07: Avoid opening Purpose sections with the document title restated
-  verbatim.
+  - Known deviation: `code-table-guide.md` entry is missing version
+    and team name.
+- L07 (Note): Avoid opening Purpose sections with the document title
+  restated verbatim.
   - Correct: "Item type codes classify items for circulation policy..."
   - Avoid: "The Item Types code table documents item type codes..."
 
@@ -136,24 +175,32 @@ that should be linked are linked.
 
 **Rules:**
 
-- X01: All inter-spec references use relative markdown links.
+- X01 (Error): All inter-spec references use relative markdown links.
   - From `specs/` root: `./glossary.md`, `./FRAMEWORK.md`
   - From category subfolders: `../glossary.md`, `../FRAMEWORK.md`
   - Never absolute paths or bare filenames
-- X02: Front matter `depends_on` and `related_specs` entries each have
-  at least one corresponding body-prose link in the document.
-- X03: Glossary terms are linked on first use per major section (not
-  every occurrence, but at least once where the term first appears in
-  each `##`-level section).
-- X04: Registry entries referenced from other specs use anchor links:
-  `item-types.md#itype-70--book-on-cd`
-- X05: Guide files link back to FRAMEWORK.md for shared conventions
-  rather than restating them.
-- X06: No orphan references — if FRAMEWORK.md mentions a guide, that
-  guide exists (even as a stub).
-- X07: No dead links — every `[text](path)` and `[text](path#anchor)`
-  resolves to an existing file and (where applicable) a valid heading
-  anchor.
+- X02 (Warning): Front matter `depends_on` and `related_specs` entries
+  each have at least one corresponding body-prose link in the document.
+- X03 (Note): Glossary terms are linked on first use per major section
+  (not every occurrence, but at least once where the term first appears
+  in each `##`-level section).
+- X04 (Error): Registry entries referenced from other specs use anchor
+  links. The anchor slug must match the actual MkDocs-generated anchor
+  for the heading.
+  - The canonical anchor format must be tested against
+    `uv run mkdocs build --strict` during Phase 1 Pass 5. The `·`
+    separator produces a slug that needs empirical verification
+    (e.g., `### ITYPE-70 · Book on CD` may produce
+    `#itype-70--book-on-cd` or `#itype-70-book-on-cd` depending on
+    whether MkDocs collapses consecutive hyphens).
+  - Once verified, document the canonical form in this rule.
+- X05 (Warning): Guide files link back to FRAMEWORK.md for shared
+  conventions rather than restating them.
+- X06 (Error): No orphan references — if FRAMEWORK.md mentions a guide,
+  that guide exists (even as a stub).
+- X07 (Error): No dead links — every `[text](path)` and
+  `[text](path#anchor)` resolves to an existing file and (where
+  applicable) a valid heading anchor.
 
 ### Dimension 4: Redundancy & Ownership
 
@@ -162,20 +209,22 @@ elsewhere, not restated in multiple locations.
 
 **Rules:**
 
-- R01: Front matter field documentation lives in FRAMEWORK.md only.
-  - Guides reference it with a link, do not redefine fields.
-- R02: Section structure and ordering lives in category guides only.
-  - FRAMEWORK.md references the guides via the Category Guides table.
-- R03: The source-of-truth principle is stated once prominently in
-  FRAMEWORK.md's overview.
+- R01 (Warning): Front matter field documentation lives in FRAMEWORK.md
+  only. Guides reference it with a link, do not redefine fields.
+- R02 (Warning): Section structure and ordering lives in category guides
+  only. FRAMEWORK.md references the guides via the Category Guides
+  table.
+- R03 (Note): The source-of-truth principle is stated once prominently
+  in FRAMEWORK.md's overview.
   - Other documents (guides, specs/README.md, root README.md) may
     reference it but should not restate it in different words.
-- R04: Cross-referencing conventions live in FRAMEWORK.md.
-  - Guides show examples but link to the framework for full rules.
-- R05: Glossary term definitions live in glossary.md only.
-  - Specs link to glossary terms, do not re-explain inline.
-- R06: The "what specs exist" listing lives in specs/README.md only.
-  - Root README.md links to it rather than duplicating the table.
+  - This is a judgment call — flagged for human decision when found.
+- R04 (Warning): Cross-referencing conventions live in FRAMEWORK.md.
+  Guides show examples but link to the framework for full rules.
+- R05 (Warning): Glossary term definitions live in glossary.md only.
+  Specs link to glossary terms, do not re-explain inline.
+- R06 (Note): The "what specs exist" listing lives in specs/README.md
+  only. Root README.md links to it rather than duplicating the table.
 
 ### Dimension 5: MkDocs Compatibility
 
@@ -184,21 +233,29 @@ GitHub Pages.
 
 **Rules:**
 
-- M01: Every spec and guide file appears in `mkdocs.yml` nav.
-- M02: Anchor links use MkDocs-compatible slug format:
+- M01 (Error): Every spec and guide file appears in `mkdocs.yml` nav.
+- M02 (Error): Anchor links use MkDocs-compatible slug format:
   - Lowercase
   - Spaces become hyphens
   - Special characters (including `·`) become hyphens
-  - Consecutive hyphens collapse
-- M03: The `docs_dir: specs` setting means all nav paths and links are
-  relative to `specs/` — verify paths work from that root.
-- M04: Guide files have a front matter `title` field for MkDocs page
-  titles.
-- M05: No links use GitHub-specific features that fail in MkDocs:
+  - Whether consecutive hyphens collapse must be empirically verified
+    during Phase 1 Pass 5 (see X04)
+- M03 (Error): The `docs_dir: specs` setting means all nav paths and
+  links are relative to `specs/` — verify paths work from that root.
+- M04 (Warning): Non-spec markdown files that appear in the MkDocs site
+  should have a front matter `title` field for MkDocs page titles.
+  This applies to:
+  - Guide files (`specs/guides/*.md`)
+  - `specs/glossary.md` (currently has no front matter at all)
+  - `specs/FRAMEWORK.md` (has `version` and `purpose` but no `title`)
+  - `specs/README.md` (no front matter)
+  - Spec files already have `title` in their required front matter.
+- M05 (Warning): No links use GitHub-specific features that fail in
+  MkDocs:
   - Directory links with trailing `/`
   - Links to non-markdown files without explicit handling
-- M06: Nav structure in mkdocs.yml reflects the actual category
-  organization and includes all published documents.
+- M06 (Warning): Nav structure in mkdocs.yml reflects the actual
+  category organization and includes all published documents.
 
 **Validation:** Run `uv run mkdocs build --strict` to catch broken
 links and missing nav entries.
@@ -248,6 +305,7 @@ and cooperates with human reviewers.
 #### Fix Mode
 
 1. Perform all review mode steps (1-4) to identify issues
+
 2. Group related fixes into batches:
    - Mechanical fixes (link corrections, heading format, status line
      formatting) are grouped by file
@@ -264,6 +322,20 @@ and cooperates with human reviewers.
 4. After all batches are processed, run the full rule set again to
    verify no regressions were introduced by the fixes
 5. Present a summary of what was changed and what was skipped
+
+#### Regressions Mode
+
+1. Read the rules file and load only rules that have example findings
+   with file paths (these are the regression baselines)
+2. Check each baseline finding against the current file state
+3. Report:
+   - **Clean** — previously fixed issue has not recurred
+   - **Regression** — issue has recurred (elevated severity, includes
+     note about when it was originally found)
+4. Do NOT check for new issues — only check known baselines
+5. Do NOT modify any files
+6. This mode is fast and focused — useful as a pre-commit check or
+   after bulk edits
 
 ### Rule Sets
 
@@ -295,6 +367,32 @@ Each rule has this structure:
      {date}. It has recurred."
 4. New findings discovered in subsequent runs can be added to the rules
    file, expanding the regression suite over time.
+
+### Onboarding New Categories
+
+When a new category guide is written (e.g., loan-rule-guide.md):
+
+1. Add section-ordering rules to the rules file following the pattern
+   of S01/S02 (the guide prescribes the ordering; the rule enforces it)
+2. Add the heading pattern rule following S05/S06/S08 (using the
+   `rule_prefixes` value from `schema.yaml` for the new category)
+3. Run the agent in review mode to check any existing specs in the new
+   category against the new rules
+4. Add the guide to the agent's startup checklist (step 4 reads all
+   guides in `specs/guides/`)
+
+No changes to the agent prompt are needed — only the rules file grows.
+
+### Schema.yaml Integration
+
+The agent reads `specs/schema.yaml` at startup (step 3 in the startup
+checklist) and uses it as a source of truth for:
+
+- Valid categories and their folder names (used by S01, S02)
+- Rule identifier prefixes per category (used by S05, S08)
+- Required front matter fields per category (cross-referenced with
+  the validation script, not duplicated)
+- Valid status values (used by L05)
 
 ### Cooperation Model
 
