@@ -40,6 +40,9 @@ ils-specs/
     ├── guides/                # Category-specific writing guides
     │   ├── report-guide.md    # How to write report specifications
     │   └── code-table-guide.md # How to write code table specifications (stub)
+    ├── contributing/          # Contributor and maintainer workflow guides
+    │   ├── contributing-guide.md  # How to edit specs and submit PRs
+    │   └── maintainer-guide.md    # Operations guide for the ILS Team
     ├── reports/               # Report specifications
     ├── code-tables/           # Code table specifications
     ├── loan-rules/            # Loan rule specifications
@@ -206,3 +209,11 @@ Technical details go in "Technical implementation" notes within rules, clearly
 separated from the plain-English statements.
 
 The audience for *tooling and this file* is developers and AI agents.
+
+## Human Contributor Guides
+
+For human contributor workflows (how to edit specs, submit PRs, review and
+merge), see the [Contributing Guide](https://cincinnatilibrary.github.io/ils-specs/contributing/contributing-guide/)
+and [Maintainer Guide](https://cincinnatilibrary.github.io/ils-specs/contributing/maintainer-guide/)
+on the published site. This file (AGENTS.md) is the authoritative source for
+AI agent procedures.
