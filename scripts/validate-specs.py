@@ -30,7 +30,7 @@ SEMVER_RE = re.compile(r"^\d+\.\d+\.\d+$")
 SKIP_FILES = {"README.md", "FRAMEWORK.md", "glossary.md", "schema.yaml"}
 
 # Directories under specs/ that are not category folders
-SKIP_DIRS = {"guides"}
+SKIP_DIRS = {"guides", "contributing"}
 
 
 def load_schema():
