@@ -27,6 +27,9 @@ nav:
   - Guides:
       - Report Specifications: guides/report-guide.md
       - Code Tables: guides/code-table-guide.md
+  - Contributing:
+      - Contributing Guide: contributing/contributing-guide.md
+      - Maintainer Guide: contributing/maintainer-guide.md
   - Reports:
       - reports/slitemdata.md
   - Code Tables:
