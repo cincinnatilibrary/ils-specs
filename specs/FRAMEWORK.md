@@ -1,4 +1,5 @@
 ---
+title: CHPL ILS Specification Framework
 version: 2.0.0
 purpose: Defines the standard format, front matter schema, and style guide for ILS business logic specification documents at Cincinnati & Hamilton County Public Library (CHPL). All spec documents should conform to this framework.
 ---
@@ -162,7 +163,7 @@ Use relative links so they work when browsing the repository directly.
 ### 3. Registry Entry Links
 
 ```markdown
-See [Book on CD](../code-tables/item-types.md#itype-70--book-on-cd) for details
+See [Book on CD](../code-tables/item-types.md#itype-70-book-on-cd) for details
 on this item type.
 ```
 

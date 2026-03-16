@@ -6,13 +6,13 @@ This directory contains all ILS specification documents for CHPL.
 
 Specs are organized by category:
 
-| Folder                       | Category    | Contents                                       |
-| ---------------------------- | ----------- | ---------------------------------------------- |
-| [reports/](reports/)         | Reports     | Automated reports generated from Sierra data   |
-| [code-tables/](code-tables/) | Code Tables | Sierra code sets (locations, item types, etc.) |
-| [loan-rules/](loan-rules/)   | Loan Rules  | Lending policies and configurations            |
-| [workflows/](workflows/)     | Workflows   | Operational processes involving Sierra         |
-| [policies/](policies/)       | Policies    | Library policies with ILS implications         |
+| Folder       | Category    | Contents                                       |
+| ------------ | ----------- | ---------------------------------------------- |
+| reports/     | Reports     | Automated reports generated from Sierra data   |
+| code-tables/ | Code Tables | Sierra code sets (locations, item types, etc.) |
+| loan-rules/  | Loan Rules  | Lending policies and configurations            |
+| workflows/   | Workflows   | Operational processes involving Sierra         |
+| policies/    | Policies    | Library policies with ILS implications         |
 
 ## Reference Documents
 

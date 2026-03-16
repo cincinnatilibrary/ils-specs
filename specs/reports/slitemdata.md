@@ -6,8 +6,8 @@ owner: ILS Team
 reviewers:
   - Report Assessment Team
 status: draft
-version: 0.2.0
-last_updated: 2026-03-13
+version: 0.2.1
+last_updated: 2026-03-16
 implementation:
   - Reports/shelflist/SierraItemData-2024-06-03.pl
 schedule: Monthly, 1st of month
@@ -72,7 +72,10 @@ described in the flag rules below.
 ## Flag Conditions
 
 Each flag condition causes an item to appear in the report output. An item may be
-flagged for multiple reasons.
+flagged for multiple reasons. Flag conditions reference
+[item types](../code-tables/item-types.md) and
+[location codes](../code-tables/location-codes.md) defined in the code table
+specifications.
 
 ### F01 · Material Type / Item Type Mismatch
 
@@ -235,3 +238,4 @@ These need to be resolved with the Report Assessment Team and ILS Team:
 
 - 2026-03-13 · v0.1.0 · Initial draft, distilled from Perl script analysis (ILS Team)
 - 2026-03-13 · v0.2.0 · Rename "Rules / Conditions" to "Flag Conditions" per framework 2.0 (ILS Team)
+- 2026-03-16 · v0.2.1 · Add code table cross-reference links in Flag Conditions intro (ILS Team)

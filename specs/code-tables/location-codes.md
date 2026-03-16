@@ -7,8 +7,8 @@ reviewers:
   - Report Assessment Team
   - Cataloging and Processing
 status: draft
-version: 0.1.0
-last_updated: 2026-03-13
+version: 0.1.1
+last_updated: 2026-03-16
 ---
 
 # Location Codes
@@ -32,7 +32,7 @@ and group data by branch and collection.
 **Out of scope:** Location codes from other INN-Reach libraries or consortial
 partners.
 
-## Rules / Codes
+## Rules
 
 The full code list needs to be exported from Sierra. The following are structural
 categories identified from the `Sierra::Locations` module.
@@ -121,3 +121,4 @@ that maps codes to human-readable names.
 ## Change Log
 
 - 2026-03-13 · v0.1.0 · Initial stub with structural categories from Sierra::Locations (ILS Team)
+- 2026-03-16 · v0.1.1 · Rename section heading per code-table guide convention (ILS Team)

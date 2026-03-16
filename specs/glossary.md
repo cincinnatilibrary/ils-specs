@@ -1,3 +1,7 @@
+---
+title: Glossary
+---
+
 # Glossary
 
 Terms used across ILS specifications at CHPL. When a term has a specific meaning

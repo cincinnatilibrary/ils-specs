@@ -23,6 +23,7 @@ All specs live in the `specs/` directory, organized by category.
 
 ## Getting Started
 
+- **Browse online:** [cincinnatilibrary.github.io/ils-specs](https://cincinnatilibrary.github.io/ils-specs/)
 - **Reading specs:** Start with [specs/README.md](specs/README.md) for a
   navigable index of all specifications.
 - **Writing specs:** Read [specs/FRAMEWORK.md](specs/FRAMEWORK.md) for the

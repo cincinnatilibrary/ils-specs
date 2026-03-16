@@ -23,6 +23,28 @@ documents that need to check record properties against valid values.
 
 ______________________________________________________________________
 
+## Anatomy of a Code Table Spec
+
+Code table specifications follow this section ordering after the
+front matter and title heading:
+
+1. **Purpose** — what the code table is, why it matters
+2. **Scope & Audience** — who uses it, what is in/out of scope
+3. **Registry** or **Rules** — the heart of the document (see below)
+4. **Sierra Configuration** — how the codes are managed in Sierra admin
+5. **Open Questions** — unresolved decisions
+6. **Change Log** — version history
+
+A code table spec uses EITHER a **Registry** section (for individual
+code-value listings, like item types) OR a **Rules** section (for
+structural categories, like location code classifications). See
+[Registry Format](#registry-format) below for registry-style specs.
+Rules-style specs use headings like `### C01 · Branch Locations`, where
+the `C` prefix comes from `schema.yaml` `rule_prefixes` for the
+`code-table` category.
+
+______________________________________________________________________
+
 ## Registry Format
 
 Code-table specs include a **Registry** section that lists all defined
@@ -57,4 +79,5 @@ ______________________________________________________________________
 
 ## Change Log
 
-- 2026-03-13 · Initial stub migrated from FRAMEWORK.md v1.0
+- 2026-03-13 · v0.1.0 · Initial stub migrated from FRAMEWORK.md (ILS Team)
+- 2026-03-16 · v0.2.0 · Add section ordering and anatomy section (ILS Team)
