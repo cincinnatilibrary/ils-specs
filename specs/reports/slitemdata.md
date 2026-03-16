@@ -72,7 +72,10 @@ described in the flag rules below.
 ## Flag Conditions
 
 Each flag condition causes an item to appear in the report output. An item may be
-flagged for multiple reasons.
+flagged for multiple reasons. Flag conditions reference
+[item types](../code-tables/item-types.md) and
+[location codes](../code-tables/location-codes.md) defined in the code table
+specifications.
 
 ### F01 · Material Type / Item Type Mismatch
 

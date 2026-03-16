@@ -349,7 +349,7 @@ depends_on:
 And in the body, you can link directly to specific codes:
 
 ```markdown
-See [Book on CD](../code-tables/item-types.md#itype-70--book-on-cd) for
+See [Book on CD](../code-tables/item-types.md#itype-70-book-on-cd) for
 details on this item type.
 ```
 

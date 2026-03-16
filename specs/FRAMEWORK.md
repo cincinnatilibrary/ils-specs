@@ -162,7 +162,7 @@ Use relative links so they work when browsing the repository directly.
 ### 3. Registry Entry Links
 
 ```markdown
-See [Book on CD](../code-tables/item-types.md#itype-70--book-on-cd) for details
+See [Book on CD](../code-tables/item-types.md#itype-70-book-on-cd) for details
 on this item type.
 ```
 
