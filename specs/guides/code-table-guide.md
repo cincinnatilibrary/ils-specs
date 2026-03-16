@@ -79,4 +79,5 @@ ______________________________________________________________________
 
 ## Change Log
 
-- 2026-03-13 · Initial stub migrated from FRAMEWORK.md v1.0
+- 2026-03-13 · v0.1.0 · Initial stub migrated from FRAMEWORK.md (ILS Team)
+- 2026-03-16 · v0.2.0 · Add section ordering and anatomy section (ILS Team)
