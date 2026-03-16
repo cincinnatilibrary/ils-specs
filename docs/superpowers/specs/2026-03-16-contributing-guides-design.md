@@ -36,9 +36,11 @@ For both teams. Covers:
 3. **What to Update When You Make a Change** — Concise restatement of
    FRAMEWORK.md versioning rules: bump `version` (PATCH/MINOR/MAJOR), update
    `last_updated`, add changelog entry. Links to FRAMEWORK.md for full details.
-4. **Common Tasks** — Short recipes: fixing a typo, updating a flag status,
-   adding a new flag condition, updating report metadata. Links to category
-   guides (Report Guide, Code Table Guide) for specifics.
+4. **Common Tasks** — Step-by-step recipes (mirroring the Quick Start format
+   with explicit UI actions) for: fixing a typo, updating a flag status,
+   adding a new flag condition, updating report metadata. Each recipe shows
+   which front matter fields change and what the version bump should be.
+   Links to category guides (Report Guide, Code Table Guide) for specifics.
 5. **Pull Request Expectations** — CI runs automatically (validation, formatting,
    build). A maintainer reviews and squash-merges. Common CI failure explanations.
    Changes go live after merge.
@@ -54,14 +56,19 @@ For ILS Team. Assumes familiarity with the Contributing Guide. Covers:
 2. **Repository Overview** — Orientation to repo structure: `specs/`, `scripts/`,
    `.github/workflows/`, `overrides/`, `mkdocs.yml`
 3. **Local Development Setup** — Clone, install `uv`, `uv sync`,
-   `mkdocs serve` for local preview, pre-commit hook setup
+   `mkdocs serve` for local preview, pre-commit hook setup via
+   `git config core.hooksPath .githooks` (project uses a custom hook, not
+   the `pre-commit` framework)
 4. **Scripts & Tooling** — `scripts/validate-specs.py` (what it checks, how to
    run, how to read output), `scripts/format-specs.sh` (auto-formatting),
    `mdformat` (manual usage)
-5. **CI Pipeline** — What runs on PRs (`ci.yml`): validation → format check →
+5. **CI Pipeline** — What runs on PRs (`ci.yml`): validation → format check
+   (covers all Markdown under `specs/`, including contributing guides) →
    strict site build. What each step catches, what failures look like.
 6. **Deployment** — How GitHub Pages works (`deploy-pages.yml`): triggers on
    push to main, builds and deploys automatically. No manual steps.
+   Document the `edit_uri` setting in `mkdocs.yml` that powers the edit
+   pencil icon, so future maintainers understand the dependency.
 7. **Reviewing & Merging PRs** — Gatekeeper workflow: check CI status, review
    diff (version bump, `last_updated`, changelog), use "Squash and merge",
    conventional commit format for squash message.
@@ -127,10 +134,45 @@ nav:
       - Contributing Guide: contributing/contributing-guide.md
       - Maintainer Guide: contributing/maintainer-guide.md
   - Reports:
-      - Item Data Inconsistencies: reports/slitemdata.md
+      - reports/slitemdata.md
   - Code Tables:
-      - Location Codes: code-tables/location-codes.md
-      - Item Types: code-tables/item-types.md
+      - code-tables/location-codes.md
+      - code-tables/item-types.md
+```
+
+Note: The existing Reports and Code Tables entries are left in their current
+format (no explicit titles) to avoid unrelated changes in this PR.
+
+#### 6. Validation Script Update (`scripts/validate-specs.py`)
+
+Add `"contributing"` to the `SKIP_DIRS` set so the validator does not attempt
+to parse the contributing guides as spec documents:
+
+```python
+SKIP_DIRS = {"guides", "contributing"}
+```
+
+#### 7. AGENTS.md Update
+
+Update the repository structure tree in AGENTS.md to include the new
+`specs/contributing/` directory. Add a cross-reference noting that human
+contributor workflows are documented in the Contributing Guide, while
+AGENTS.md remains the authoritative source for AI agent procedures.
+
+#### 8. specs/README.md Update
+
+Add a "Contributing" section to the specs index page linking to the
+Contributing Guide and Maintainer Guide.
+
+#### 9. Front Matter Convention
+
+Contributing guide files follow the same convention as existing guide files
+in `specs/guides/` — minimal front matter with a `title` field only:
+
+```yaml
+---
+title: Contributing Guide
+---
 ```
 
 ## Key Decisions
