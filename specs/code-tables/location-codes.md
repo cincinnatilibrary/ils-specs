@@ -32,7 +32,7 @@ and group data by branch and collection.
 **Out of scope:** Location codes from other INN-Reach libraries or consortial
 partners.
 
-## Rules / Codes
+## Rules
 
 The full code list needs to be exported from Sierra. The following are structural
 categories identified from the `Sierra::Locations` module.
