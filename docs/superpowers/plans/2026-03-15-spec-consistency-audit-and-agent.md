@@ -738,7 +738,7 @@ the design doc plus the specific findings from Phase 1.
 
 - [ ] **Step 1: Create the rules file**
 
-Write `.claude/agents/spec-auditor-rules.md` with all 28 rules (S01-S08,
+Write `.claude/agents/spec-auditor-rules.md` with all 34 rules (S01-S08,
 L01-L07, X01-X07, R01-R06, M01-M06) using the structure from the design
 doc:
 
