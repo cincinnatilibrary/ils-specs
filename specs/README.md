@@ -19,6 +19,11 @@ Specs are organized by category:
 - [FRAMEWORK.md](FRAMEWORK.md) — How to write specs: format, schema, style guide
 - [glossary.md](glossary.md) — Controlled vocabulary for terms used across specs
 
+## Contributing
+
+- [Contributing Guide](contributing/contributing-guide.md) — How to edit specs and submit pull requests
+- [Maintainer Guide](contributing/maintainer-guide.md) — Operations guide for the ILS Team
+
 ## Active Specs
 
 *This section is updated as specs are added.*
